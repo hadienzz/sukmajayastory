@@ -6,24 +6,30 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
   {
-    image: "/foto-1.jpg",
-    category: "She Said Yes",
-    title: "A Love Written in the Stars",
-    credit: "by Sukma Jaya Story",
-  },
-  {
-    image: "/foto-2.jpg",
+    image: "/testing-3.jpg",
     category: "Portraiture",
     title: "The Essence of Being",
     credit: "by Sukma Jaya Story",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&q=80",
+    image: "/foto-1.jpg",
+    category: "She Said Yes",
+    title: "A Celebration of Love",
+    credit: "by Sukma Jaya Story",
+  },
+  {
+    image: "foto-2.jpg",
     category: "Tying the Knot",
     title: "Where Forever Begins",
     credit: "by Sukma Jaya Story",
   },
+
+  // {
+  //   image: "foto-bunga.jpg",
+  //   category: "Portraiture",
+  //   title: "When the Loves Collide",
+  //   credit: "by Sukma Jaya Story",
+  // },
 ];
 
 const HeroSlider = () => {
@@ -36,17 +42,17 @@ const HeroSlider = () => {
       setIsAnimating(true);
       setCurrent(index);
     },
-    [isAnimating, current]
+    [isAnimating, current],
   );
 
   const next = useCallback(
     () => goTo((current + 1) % slides.length),
-    [current, goTo]
+    [current, goTo],
   );
 
   const prev = useCallback(
     () => goTo((current - 1 + slides.length) % slides.length),
-    [current, goTo]
+    [current, goTo],
   );
 
   useEffect(() => {
@@ -98,7 +104,11 @@ const HeroSlider = () => {
           className="editorial-title text-4xl md:text-6xl lg:text-7xl xl:text-8xl max-w-5xl mb-6"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, ease: [0.25, 0.1, 0.25, 1], delay: 0.08 }}
+          transition={{
+            duration: 1.0,
+            ease: [0.25, 0.1, 0.25, 1],
+            delay: 0.08,
+          }}
         >
           {slides[current].title}
         </motion.h1>
@@ -107,7 +117,11 @@ const HeroSlider = () => {
           className="text-[11px] tracking-[0.25em] uppercase text-white/50 font-sans"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1], delay: 0.16 }}
+          transition={{
+            duration: 0.9,
+            ease: [0.25, 0.1, 0.25, 1],
+            delay: 0.16,
+          }}
         >
           {slides[current].credit}
         </motion.p>
@@ -149,10 +163,22 @@ const HeroSlider = () => {
             aria-label={`Go to slide ${i + 1}`}
             animate={
               i === current
-                ? { width: 32, height: 3, backgroundColor: "rgba(255,255,255,1)" }
-                : { width: 6, height: 6, backgroundColor: "rgba(255,255,255,0.3)" }
+                ? {
+                    width: 32,
+                    height: 3,
+                    backgroundColor: "rgba(255,255,255,1)",
+                  }
+                : {
+                    width: 6,
+                    height: 6,
+                    backgroundColor: "rgba(255,255,255,0.3)",
+                  }
             }
-            whileHover={i === current ? undefined : { backgroundColor: "rgba(255,255,255,0.5)" }}
+            whileHover={
+              i === current
+                ? undefined
+                : { backgroundColor: "rgba(255,255,255,0.5)" }
+            }
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
           />
         ))}
@@ -167,7 +193,11 @@ const HeroSlider = () => {
           <motion.div
             className="w-full h-3 bg-white/60 absolute"
             animate={{ y: [0, 18, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
           />
         </div>
       </div>
