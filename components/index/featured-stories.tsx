@@ -10,7 +10,7 @@ const stories = [
     id: 1,
     slug: "eternal-vows-in-ubud",
     image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80",
+      "/foto-featured-1.JPG",
     date: "December 2025",
     category: "Tying the Knot",
     title: "Eternal Vows in Ubud",
@@ -21,7 +21,7 @@ const stories = [
     id: 2,
     slug: "golden-hour-portraits",
     image:
-      "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=1200&q=80",
+      "/featured-2.jpeg",
     date: "November 2025",
     category: "Portraiture",
     title: "Golden Hour Portraits",

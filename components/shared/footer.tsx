@@ -96,7 +96,7 @@ const Footer = () => {
               <p className="nav-link text-white/40">Bogor, Indonesia</p>
               <div className="flex gap-4 md:justify-end pt-2">
                 <motion.a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/sukmajayastory/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/40"

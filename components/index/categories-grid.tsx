@@ -81,38 +81,38 @@ const CategoriesGrid = () => {
                 href={`/photography/${category.slug}`}
                 className="group relative block overflow-hidden"
               >
-              {/* Image */}
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <motion.div
-                  className="absolute inset-0"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-                >
-                  <Image
-                    src={category.image}
-                    alt={category.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                {/* Image */}
+                <div className="relative aspect-3/4 overflow-hidden group">
+                  <motion.div
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                  >
+                    <Image
+                      src={category.image}
+                      alt={category.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out "
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    />
+                  </motion.div>
+                  {/* Overlay */}
+                  <motion.div
+                    className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent"
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
                   />
-                </motion.div>
-                {/* Overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                />
 
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-end pb-10 px-4 text-center">
-                  <h3 className="editorial-title text-white text-xl md:text-2xl mb-2">
-                    {category.title}
-                  </h3>
-                  <span className="text-[10px] tracking-[0.2em] uppercase text-white/50 font-sans">
-                    {category.count} Stories
-                  </span>
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-end pb-10 px-4 text-center">
+                    <h3 className="editorial-title text-white text-xl md:text-2xl mb-2">
+                      {category.title}
+                    </h3>
+                    <span className="text-[10px] tracking-[0.2em] uppercase text-white/50 font-sans">
+                      {category.count} Stories
+                    </span>
+                  </div>
                 </div>
-              </div>
               </Link>
             </motion.div>
           ))}
