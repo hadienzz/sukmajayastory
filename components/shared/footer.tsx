@@ -45,7 +45,7 @@ const Footer = () => {
               Sukma Jaya Story
             </Link>
             <p className="body-text !text-white/40 max-w-xs text-sm leading-relaxed">
-              Premium photography and videography studio based in Bali.
+              Premium photography and videography studio based in Bogor.
               Capturing timeless moments with an editorial eye.
             </p>
           </div>
@@ -93,7 +93,7 @@ const Footer = () => {
               >
                 hello@sukmajayastory.com
               </motion.a>
-              <p className="nav-link text-white/40">Bali, Indonesia</p>
+              <p className="nav-link text-white/40">Bogor, Indonesia</p>
               <div className="flex gap-4 md:justify-end pt-2">
                 <motion.a
                   href="https://instagram.com"
