@@ -187,3 +187,169 @@
   background-color: #d4c5a9;
   color: #111111;
 }
+
+/* ─── Journal Content with Drop Cap ─── */
+
+.journal-content {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: #333333;
+}
+
+.journal-content p {
+  margin-bottom: 1.75em;
+}
+
+.journal-content p:first-of-type::first-letter {
+  font-family: var(--font-playfair), serif;
+  font-size: 4.5em;
+  font-weight: 400;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.08em;
+  margin-top: 0.05em;
+  color: #111111;
+}
+
+.journal-content h2 {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  color: #111111;
+}
+
+.journal-content h3 {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+  color: #111111;
+}
+
+.journal-content blockquote {
+  border-left: 2px solid #d4c5a9;
+  padding-left: 1.5em;
+  margin: 2em 0;
+  font-style: italic;
+  color: #777777;
+}
+
+.journal-content a {
+  color: #111111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.journal-content img {
+  max-width: 100%;
+  margin: 2em 0;
+}
+
+.journal-content ul,
+.journal-content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.journal-content li {
+  margin-bottom: 0.5em;
+}
+
+/* ─── TipTap Editor Styles ─── */
+
+.tiptap {
+  min-height: 400px;
+  padding: 1.25rem 1.5rem;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #333333;
+}
+
+.tiptap:focus {
+  outline: none;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #ccc;
+  pointer-events: none;
+  height: 0;
+  font-style: italic;
+}
+
+.tiptap p {
+  margin-bottom: 1em;
+}
+
+.tiptap h1 {
+  font-family: var(--font-playfair), serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.tiptap h2 {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.tiptap h3 {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.tiptap blockquote {
+  border-left: 2px solid #d4c5a9;
+  padding-left: 1em;
+  margin: 1em 0;
+  font-style: italic;
+  color: #777;
+}
+
+.tiptap ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.tiptap ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.tiptap li {
+  margin-bottom: 0.3em;
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 1px solid #e5e5e5;
+  margin: 2em 0;
+}
+
+.tiptap img {
+  max-width: 100%;
+  border-radius: 2px;
+  margin: 1em 0;
+}
+
+.tiptap a {
+  color: #2563eb;
+  text-decoration: underline;
+}

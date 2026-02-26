@@ -61,7 +61,10 @@ const HeroSlider = () => {
   }, [next]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[#0a0a0a]">
+    <section
+      onDragStart={(e) => e.preventDefault()}
+      className="relative w-full h-screen overflow-hidden bg-[#0a0a0a] select-none **:select-none **:[-webkit-user-drag:none] [-webkit-tap-highlight-color:transparent]"
+    >
       {/* Slides */}
       <AnimatePresence
         mode="wait"
@@ -78,21 +81,20 @@ const HeroSlider = () => {
           transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <motion.div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 bg-cover bg-center pointer-events-none"
             style={{ backgroundImage: `url(${slides[current].image})` }}
             initial={{ scale: 1.02 }}
             animate={{ scale: 1.08 }}
             transition={{ duration: 8, ease: [0.25, 0.1, 0.25, 1] }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/50" />
         </motion.div>
       </AnimatePresence>
-
       {/* Content overlay */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6 select-none pointer-events-none">
         <motion.span
           key={`cat-${current}`}
-          className="category-label !text-white/70 mb-6"
+          className="category-label text-white/70! mb-6 pointer-events-none "
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
@@ -126,7 +128,6 @@ const HeroSlider = () => {
           {slides[current].credit}
         </motion.p>
       </div>
-
       {/* Navigation arrows */}
       <motion.button
         onClick={prev}
@@ -152,7 +153,6 @@ const HeroSlider = () => {
       >
         <ChevronRight className="w-10 h-10" strokeWidth={1} />
       </motion.button>
-
       {/* Pagination dots */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
         {slides.map((_, i) => (
@@ -183,13 +183,12 @@ const HeroSlider = () => {
           />
         ))}
       </div>
-
       {/* Scroll indicator */}
       <div className="absolute bottom-12 right-8 z-10 hidden lg:flex flex-col items-center gap-2">
         <span className="text-[10px] tracking-[0.2em] uppercase text-white/40 [writing-mode:vertical-rl]">
           Scroll
         </span>
-        <div className="w-[1px] h-8 bg-white/20 relative overflow-hidden">
+        <div className="w-px h-8 bg-white/20 relative overflow-hidden">
           <motion.div
             className="w-full h-3 bg-white/60 absolute"
             animate={{ y: [0, 18, 0] }}

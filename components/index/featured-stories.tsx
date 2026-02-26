@@ -9,8 +9,7 @@ const stories = [
   {
     id: 1,
     slug: "eternal-vows-in-ubud",
-    image:
-      "/foto-featured-1.JPG",
+    image: "/foto-featured-1.JPG",
     date: "December 2025",
     category: "Tying the Knot",
     title: "Eternal Vows in Ubud",
@@ -20,8 +19,7 @@ const stories = [
   {
     id: 2,
     slug: "golden-hour-portraits",
-    image:
-      "/featured-2.jpeg",
+    image: "/featured-2.jpeg",
     date: "November 2025",
     category: "Portraiture",
     title: "Golden Hour Portraits",
@@ -32,7 +30,7 @@ const stories = [
     id: 3,
     slug: "a-beginning-of-forever",
     image:
-      "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1200&q=80",
+      "/featured-3.webp",
     date: "October 2025",
     category: "She Said Yes",
     title: "A Beginning of Forever",
@@ -45,7 +43,7 @@ const FeaturedStories = () => {
   return (
     <section className="py-24 md:py-32 lg:py-40 bg-white">
       {/* Section header */}
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-10 mb-16 md:mb-24">
+      <div className="max-w-300 mx-auto px-6 lg:px-10 mb-16 md:mb-24">
         <div className="text-center">
           <span className="category-label block mb-4">Journal</span>
           <h2 className="editorial-title text-3xl md:text-4xl lg:text-5xl text-[#111111]">
@@ -55,7 +53,7 @@ const FeaturedStories = () => {
       </div>
 
       {/* Stories */}
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
+      <div className="max-w-300 mx-auto px-6 lg:px-10">
         <div className="space-y-24 md:space-y-32 lg:space-y-40">
           {stories.map((story, index) => (
             <StoryCard key={story.id} story={story} index={index} />
@@ -64,9 +62,15 @@ const FeaturedStories = () => {
       </div>
 
       {/* View all link */}
-      <div className="max-w-[1200px] mx-auto px-6 lg:px-10 mt-20 md:mt-28 text-center">
-        <motion.div whileHover={{ opacity: 0.65 }} transition={{ duration: 0.25 }}>
-          <Link href="/journal" className="inline-flex items-center gap-3 nav-link text-[#111111]">
+      <div className="max-w-300 mx-auto px-6 lg:px-10 mt-20 md:mt-28 text-center">
+        <motion.div
+          whileHover={{ opacity: 0.65 }}
+          transition={{ duration: 0.25 }}
+        >
+          <Link
+            href="/journal"
+            className="inline-flex items-center gap-3 nav-link text-[#111111]"
+          >
             View All Stories
             <motion.span whileHover={{ x: 4 }} transition={{ duration: 0.25 }}>
               <ArrowRight className="w-4 h-4" strokeWidth={1.5} />
@@ -97,7 +101,7 @@ const StoryCard = ({ story, index }: StoryCardProps) => {
       {/* Image */}
       <Link
         href={`/journal/${story.slug}`}
-        className={`block relative aspect-[4/5] md:aspect-[3/4] overflow-hidden ${
+        className={`block relative aspect-4/5 md:aspect-3/4 overflow-hidden ${
           isEven ? "lg:order-1" : "lg:order-2"
         }`}
       >
@@ -126,13 +130,16 @@ const StoryCard = ({ story, index }: StoryCardProps) => {
       >
         <div className="flex items-center gap-4 mb-6">
           <span className="category-label">{story.category}</span>
-          <span className="w-8 h-[1px] bg-[#d4d4d4]" />
+          <span className="w-8 h-px bg-[#d4d4d4]" />
           <span className="text-[11px] tracking-[0.15em] text-[#999999] font-sans">
             {story.date}
           </span>
         </div>
 
-        <motion.div whileHover={{ opacity: 0.8 }} transition={{ duration: 0.25 }}>
+        <motion.div
+          whileHover={{ opacity: 0.8 }}
+          transition={{ duration: 0.25 }}
+        >
           <Link href={`/journal/${story.slug}`}>
             <h3 className="editorial-title text-2xl md:text-3xl lg:text-4xl text-[#111111] mb-5">
               {story.title}
