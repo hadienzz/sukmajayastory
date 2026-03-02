@@ -1,13 +1,16 @@
 "use client";
 
+import useGetJournalOutline from "@/hooks/use-journal";
 import { dummyJournals } from "@/lib/dummy-journals";
 import { BookOpen, Eye, PenSquare, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardOverview() {
-  const totalJournals = dummyJournals.length;
-  const featuredCount = dummyJournals.filter((j) => j.featured).length;
-  const categories = [...new Set(dummyJournals.map((j) => j.category))];
+  const { data } = useGetJournalOutline();
+
+  const totalJournals = data.length;
+  const featuredCount = data.filter((j) => j.featured).length;
+  const categories = [...new Set(data.map((j) => j.category))];
 
   const stats = [
     {
@@ -28,17 +31,17 @@ export default function DashboardOverview() {
       icon: Eye,
       color: "bg-green-50 text-green-600",
     },
-    {
-      label: "Authors",
-      value: [...new Set(dummyJournals.map((j) => j.author))].length,
-      icon: PenSquare,
-      color: "bg-purple-50 text-purple-600",
-    },
+    // {
+    //   label: "Authors",
+    //   value: [...new Set(data.map((j) => j.author))].length,
+    //   icon: PenSquare,
+    //   color: "bg-purple-50 text-purple-600",
+    // },
   ];
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
         <div>
           <h1 className="editorial-title text-2xl md:text-3xl">Dashboard</h1>
           <p className="body-text text-sm mt-1">
@@ -47,7 +50,7 @@ export default function DashboardOverview() {
         </div>
         <Link
           href="/dashboard/journals/create"
-          className="inline-flex items-center gap-2 bg-[#111] text-white px-5 py-2.5 text-sm font-light tracking-wide hover:bg-[#333] transition-colors"
+          className="inline-flex w-full sm:w-auto justify-center items-center gap-2 bg-[#111] text-white px-5 py-2.5 text-sm font-light tracking-wide hover:bg-[#333] transition-colors"
         >
           <PenSquare size={14} />
           New Journal
@@ -55,7 +58,7 @@ export default function DashboardOverview() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
         {stats.map((stat) => (
           <div
             key={stat.label}
@@ -76,7 +79,7 @@ export default function DashboardOverview() {
       <div className="bg-white border border-[#eee] rounded-sm">
         <div className="px-6 py-4 border-b border-[#eee] flex items-center justify-between">
           <h2 className="editorial-title text-lg">Recent Journals</h2>
-          <Link
+          <Link 
             href="/dashboard/journals"
             className="category-label hover:text-[#111] transition-colors"
           >
@@ -84,10 +87,10 @@ export default function DashboardOverview() {
           </Link>
         </div>
         <div className="divide-y divide-[#f0f0f0]">
-          {dummyJournals.slice(0, 5).map((journal) => (
+          {data.slice(0, 5).map((journal) => (
             <div
               key={journal.id}
-              className="px-6 py-4 flex items-center justify-between"
+              className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
             >
               <div className="flex-1 min-w-0">
                 <h3 className="font-light text-sm truncate">{journal.title}</h3>
@@ -97,7 +100,7 @@ export default function DashboardOverview() {
                   </span>
                   <span className="text-[#ccc]">·</span>
                   <span className="category-label !text-[10px]">
-                    {journal.author}
+                    {/* {journal.author} */}
                   </span>
                   <span className="text-[#ccc]">·</span>
                   <span className="category-label !text-[10px]">
@@ -105,7 +108,7 @@ export default function DashboardOverview() {
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-2 ml-4">
+              <div className="flex items-center gap-2 sm:ml-4">
                 {journal.featured && (
                   <span className="text-[9px] uppercase tracking-widest bg-amber-50 text-amber-600 px-2 py-0.5 rounded-sm">
                     Featured

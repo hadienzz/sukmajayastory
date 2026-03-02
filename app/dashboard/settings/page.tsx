@@ -10,7 +10,7 @@ export default function DashboardSettingsPage() {
         </p>
       </div>
 
-      <div className="bg-white border border-[#eee] rounded-sm p-6 max-w-2xl">
+      <div className="bg-white border border-[#eee] rounded-sm p-4 sm:p-6 max-w-2xl">
         <h2 className="editorial-title text-lg mb-6">General Settings</h2>
 
         <div className="space-y-5">
@@ -43,7 +43,7 @@ export default function DashboardSettingsPage() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-[#eee]">
-          <button className="inline-flex items-center gap-2 bg-[#111] text-white px-5 py-2.5 text-sm font-light tracking-wide hover:bg-[#333] transition-colors">
+          <button className="inline-flex w-full sm:w-auto justify-center items-center gap-2 bg-[#111] text-white px-5 py-2.5 text-sm font-light tracking-wide hover:bg-[#333] transition-colors">
             Save Settings
           </button>
         </div>
