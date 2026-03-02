@@ -1,16 +1,19 @@
 "use client";
 
-import { dummyJournals } from "@/lib/dummy-journals";
 import Navbar from "@/components/shared/navbar";
 import Footer from "@/components/shared/footer";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
+import { useJournalsQuery } from "@/hooks/use-journal";
 
 export default function JournalListContent() {
-  const featured = dummyJournals.find((j) => j.featured);
-  const rest = dummyJournals.filter((j) => j.id !== featured?.id);
+  const journalsQuery = useJournalsQuery();
+  const journals = journalsQuery.data ?? [];
+
+  const featured = journals.find((j) => j.featured);
+  const rest = journals.filter((j) => j.id !== featured?.id);
 
   const ease: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
@@ -53,25 +56,25 @@ export default function JournalListContent() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.3, ease }}
-          className="max-w-[1200px] mx-auto px-6 mb-24"
+          className="max-w-300 mx-auto px-6 mb-24"
         >
           <Link href={`/journal/${featured.id}`} className="group block">
-            <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+            <div className="relative aspect-video md:aspect-21/9 overflow-hidden">
               <Image
                 src={featured.coverImage}
                 alt={featured.title}
                 fill
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-                <span className="category-label !text-white/50 block mb-3">
+                <span className="category-label text-white/50! block mb-3">
                   {featured.category} — Featured
                 </span>
                 <h2 className="editorial-title text-2xl md:text-3xl lg:text-4xl text-white mb-3">
                   {featured.title}
                 </h2>
-                <p className="body-text !text-white/70 max-w-xl text-sm">
+                <p className="body-text text-white/70! max-w-xl text-sm">
                   {featured.excerpt}
                 </p>
               </div>
@@ -81,7 +84,21 @@ export default function JournalListContent() {
       )}
 
       {/* Journal Grid */}
-      <div className="max-w-[1200px] mx-auto px-6 pb-32">
+      <div className="max-w-300 mx-auto px-6 pb-32">
+        {journalsQuery.isLoading && (
+          <div className="text-center py-12">
+            <p className="body-text text-sm">Loading journals...</p>
+          </div>
+        )}
+
+        {journalsQuery.isError && (
+          <div className="text-center py-12">
+            <p className="body-text text-sm">
+              Failed to load journals: {journalsQuery.error?.message ?? "Unknown error"}
+            </p>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
           {rest.map((journal, i) => (
             <motion.div
@@ -91,7 +108,7 @@ export default function JournalListContent() {
               transition={{ duration: 0.7, delay: 0.1 * i, ease }}
             >
               <Link href={`/journal/${journal.id}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden mb-5">
+                <div className="relative aspect-4/3 overflow-hidden mb-5">
                   <Image
                     src={journal.coverImage}
                     alt={journal.title}
@@ -110,7 +127,7 @@ export default function JournalListContent() {
                 </p>
                 <div className="flex items-center gap-2 text-[#aaa]">
                   <Calendar size={12} />
-                  <span className="category-label !text-[#aaa]">
+                  <span className="category-label text-[#aaa]!">
                     {new Date(journal.publishedAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -122,6 +139,13 @@ export default function JournalListContent() {
             </motion.div>
           ))}
         </div>
+        {!journalsQuery.isLoading &&
+          !journalsQuery.isError &&
+          journals.length === 0 && (
+            <div className="text-center py-12">
+              <p className="body-text text-sm">No journals published yet.</p>
+            </div>
+          )}
       </div>
 
       <Footer />

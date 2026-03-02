@@ -21,7 +21,7 @@ export default function DashboardSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-[#111111] text-white z-40 flex flex-col">
+    <aside className="w-full md:fixed md:left-0 md:top-0 md:bottom-0 md:w-64 bg-[#111111] text-white z-40 flex flex-col">
       {/* Brand */}
       <div className="p-6 border-b border-white/10">
         <Link href="/dashboard" className="block">
@@ -58,7 +58,7 @@ export default function DashboardSidebar() {
       </nav>
 
       {/* Back to site */}
-      <div className="p-4 border-t border-white/10">
+      <div className="p-4 border-t border-white/10 md:mt-auto">
         <Link
           href="/"
           className="flex items-center gap-2 text-white/40 hover:text-white/70 text-sm transition-colors"

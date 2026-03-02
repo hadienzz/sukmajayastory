@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -34,6 +35,33 @@ interface TipTapEditorProps {
   onChange: (html: string) => void;
   placeholder?: string;
 }
+
+const ToolbarButton = ({
+  onClick,
+  active,
+  children,
+  title,
+}: {
+  onClick: () => void;
+  active?: boolean;
+  children: ReactNode;
+  title: string;
+}) => (
+  <button
+    type="button"
+    onClick={onClick}
+    title={title}
+    className={`p-2 rounded-sm transition-colors ${
+      active
+        ? "bg-[#111] text-white"
+        : "text-[#888] hover:bg-[#f0f0f0] hover:text-[#333]"
+    }`}
+  >
+    {children}
+  </button>
+);
+
+const ToolbarDivider = () => <div className="w-px h-5 bg-[#e5e5e5] mx-1" />;
 
 export default function TipTapEditor({
   content,
@@ -72,39 +100,12 @@ export default function TipTapEditor({
     editorProps: {
       attributes: {
         class:
-          "prose prose-lg max-w-none min-h-[400px] px-6 py-5 focus:outline-none font-light leading-relaxed text-[#333]",
+          "prose prose-base sm:prose-lg max-w-none min-h-[320px] sm:min-h-[400px] px-4 sm:px-6 py-5 focus:outline-none font-light leading-relaxed text-[#333]",
       },
     },
   });
 
   if (!editor) return null;
-
-  const ToolbarButton = ({
-    onClick,
-    active,
-    children,
-    title,
-  }: {
-    onClick: () => void;
-    active?: boolean;
-    children: React.ReactNode;
-    title: string;
-  }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      title={title}
-      className={`p-2 rounded-sm transition-colors ${
-        active
-          ? "bg-[#111] text-white"
-          : "text-[#888] hover:bg-[#f0f0f0] hover:text-[#333]"
-      }`}
-    >
-      {children}
-    </button>
-  );
-
-  const ToolbarDivider = () => <div className="w-px h-5 bg-[#e5e5e5] mx-1" />;
 
   const addImage = () => {
     const url = window.prompt("Enter image URL:");
@@ -123,7 +124,7 @@ export default function TipTapEditor({
   return (
     <div className="border border-[#e5e5e5] bg-white rounded-sm overflow-hidden">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-0.5 px-3 py-2 border-b border-[#e5e5e5] bg-[#fafafa]">
+      <div className="flex flex-wrap items-center gap-0.5 px-2 sm:px-3 py-2 border-b border-[#e5e5e5] bg-[#fafafa]">
         <ToolbarButton
           onClick={() => editor.chain().focus().setParagraph().run()}
           active={editor.isActive("paragraph")}
