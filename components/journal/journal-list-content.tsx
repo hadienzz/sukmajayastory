@@ -94,7 +94,8 @@ export default function JournalListContent() {
         {journalsQuery.isError && (
           <div className="text-center py-12">
             <p className="body-text text-sm">
-              Failed to load journals: {journalsQuery.error?.message ?? "Unknown error"}
+              Failed to load journals:{" "}
+              {journalsQuery.error?.message ?? "Unknown error"}
             </p>
           </div>
         )}

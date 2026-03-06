@@ -4,42 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-
-const stories = [
-  {
-    id: 1,
-    slug: "eternal-vows-in-ubud",
-    image: "/foto-featured-1.JPG",
-    date: "December 2025",
-    category: "Tying the Knot",
-    title: "Eternal Vows in Ubud",
-    description:
-      "An intimate ceremony surrounded by ancient temples and lush tropical greenery, where two souls became one under the Balinese sky.",
-  },
-  {
-    id: 2,
-    slug: "golden-hour-portraits",
-    image: "/featured-2.jpeg",
-    date: "November 2025",
-    category: "Portraiture",
-    title: "Golden Hour Portraits",
-    description:
-      "Capturing the raw beauty of golden light as it dances across familiar faces, creating timeless portraits that speak of warmth and presence.",
-  },
-  {
-    id: 3,
-    slug: "a-beginning-of-forever",
-    image:
-      "/featured-3.webp",
-    date: "October 2025",
-    category: "She Said Yes",
-    title: "A Beginning of Forever",
-    description:
-      "The proposal that started it all — a quiet moment of surprise and joy on the shores of Jimbaran, preserved in perfect stillness.",
-  },
-];
+import {
+  useGetJournalsPaginatedQuery,
+  useJournalsQuery,
+} from "@/hooks/use-journal";
 
 const FeaturedStories = () => {
+  const {
+    data: journals,
+    isLoading,
+    isError,
+    error,
+  } = useGetJournalsPaginatedQuery();
+  console.log(journals);
   return (
     <section className="py-24 md:py-32 lg:py-40 bg-white">
       {/* Section header */}
@@ -55,8 +32,8 @@ const FeaturedStories = () => {
       {/* Stories */}
       <div className="max-w-300 mx-auto px-6 lg:px-10">
         <div className="space-y-24 md:space-y-32 lg:space-y-40">
-          {stories.map((story, index) => (
-            <StoryCard key={story.id} story={story} index={index} />
+          {journals.map((journal, index) => (
+            <StoryCard key={journal.id} story={journal} index={index} />
           ))}
         </div>
       </div>
@@ -83,7 +60,7 @@ const FeaturedStories = () => {
 };
 
 interface StoryCardProps {
-  story: (typeof stories)[number];
+  story: any;
   index: number;
 }
 
@@ -111,7 +88,7 @@ const StoryCard = ({ story, index }: StoryCardProps) => {
           transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         >
           <Image
-            src={story.image}
+            src={story.coverImage}
             alt={story.title}
             fill
             className="object-cover"
@@ -132,7 +109,7 @@ const StoryCard = ({ story, index }: StoryCardProps) => {
           <span className="category-label">{story.category}</span>
           <span className="w-8 h-px bg-[#d4d4d4]" />
           <span className="text-[11px] tracking-[0.15em] text-[#999999] font-sans">
-            {story.date}
+            {story.publishedAt}
           </span>
         </div>
 
@@ -147,7 +124,7 @@ const StoryCard = ({ story, index }: StoryCardProps) => {
           </Link>
         </motion.div>
 
-        <p className="body-text max-w-md mb-8">{story.description}</p>
+        <p className="body-text max-w-md mb-8">{story.excerpt}</p>
 
         <motion.div
           className="inline-flex"
@@ -155,7 +132,7 @@ const StoryCard = ({ story, index }: StoryCardProps) => {
           transition={{ duration: 0.25 }}
         >
           <Link
-            href={`/journal/${story.slug}`}
+            href={`/journal/${story.id}`}
             className="inline-flex items-center gap-3 nav-link text-[#111111]"
           >
             Read More

@@ -11,6 +11,8 @@ const journalKeys = {
   detail: (id: string) => ["journals", id] as const,
   delete: (id: string) => ["journals", id, "delete"] as const,
   outline: ["journals", "outline"] as const,
+  byCategory: (category: string) => ["journals", "category", category] as const,
+  categories: ["journals", "categories"] as const,
 };
 
 export const useJournalsQuery = () => {
@@ -18,6 +20,16 @@ export const useJournalsQuery = () => {
     queryKey: journalKeys.all,
     queryFn: journalService.listJournals,
   });
+  const safeData = Array.isArray(data) ? data : [];
+  return { data: safeData, isLoading, isError, error };
+};
+
+export const useGetJournalsPaginatedQuery = () => {
+  const { data, isLoading, isError, error } = useQuery<Journal[], Error>({
+    queryKey: journalKeys.all,
+    queryFn: journalService.getJournalPaginated,
+  });
+console.log(data)
   const safeData = Array.isArray(data) ? data : [];
   return { data: safeData, isLoading, isError, error };
 };
@@ -83,6 +95,34 @@ const useGetJournalOutline = () => {
   const safeData = Array.isArray(data) ? data : [];
 
   return { data: safeData, isLoading, error };
+};
+
+export const useJournalsByCategoryQuery = (category: string) => {
+  const { data, isLoading, isError, error } = useQuery<
+    { data: Journal[]; message: string },
+    Error
+  >({
+    queryKey: journalKeys.byCategory(category),
+    queryFn: () => journalService.listJournalsByCategory(category),
+    enabled: Boolean(category),
+  });
+
+  return {
+    journals: data?.data ?? [],
+    emptyMessage: data?.message ?? "",
+    isLoading,
+    isError,
+    error,
+  };
+};
+
+export const useJournalCategoriesQuery = () => {
+  const { data, isLoading, isError } = useQuery<string[], Error>({
+    queryKey: journalKeys.categories,
+    queryFn: journalService.getJournalCategories,
+  });
+
+  return { categories: data ?? [], isLoading, isError };
 };
 
 export default useGetJournalOutline;
