@@ -84,6 +84,26 @@ const getJournalOutline = async () => {
   return response.data.data;
 };
 
+const getJournalPaginated = async () => {
+  const response =
+    await axiosInstance.get<ApiResponse<Journal[]>>("/api/journal/paginated");
+  return response.data.data;
+};
+
+const listJournalsByCategory = async (category: string): Promise<{ data: Journal[]; message: string }> => {
+  const response = await axiosInstance.get<ApiResponse<Journal[]>>(
+    `/api/journal/category/${encodeURIComponent(category)}`,
+  );
+  return { data: response.data.data, message: response.data.message };
+};
+
+const getJournalCategories = async (): Promise<string[]> => {
+  const response = await axiosInstance.get<ApiResponse<string[]>>(
+    "/api/journal/categories",
+  );
+  return response.data.data;
+};
+
 export const journalService = {
   createJournal,
   getJournalById,
@@ -91,6 +111,9 @@ export const journalService = {
   updateJournalById,
   deleteJournalById,
   getJournalOutline,
+  getJournalPaginated,
+  listJournalsByCategory,
+  getJournalCategories,
 };
 
 // const request = async <T>(url: string, init?: RequestInit): Promise<T> => {

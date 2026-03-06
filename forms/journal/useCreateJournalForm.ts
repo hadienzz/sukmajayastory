@@ -32,7 +32,9 @@ export const useCreateJournalForm = () => {
   const router = useRouter();
   const createMutation = useCreateJournalMutation();
   const [coverPreviewUrl, setCoverPreviewUrl] = useState<string | null>(null);
-  const [coverImageDataUrl, setCoverImageDataUrl] = useState<string | null>(null);
+  const [coverImageDataUrl, setCoverImageDataUrl] = useState<string | null>(
+    null,
+  );
   const draftKey = `${JOURNAL_DRAFT_STORAGE_PREFIX}create`;
 
   const formik = useFormik<CreateJournalFormValues>({
@@ -74,7 +76,7 @@ export const useCreateJournalForm = () => {
           window.sessionStorage.removeItem(JOURNAL_PREVIEW_ORIGIN_STORAGE_KEY);
         }
 
-        // router.push("/dashboard/journals");
+        router.push("/dashboard/journals");
       } finally {
         helpers.setSubmitting(false);
       }

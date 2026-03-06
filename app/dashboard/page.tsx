@@ -79,7 +79,7 @@ export default function DashboardOverview() {
       <div className="bg-white border border-[#eee] rounded-sm">
         <div className="px-6 py-4 border-b border-[#eee] flex items-center justify-between">
           <h2 className="editorial-title text-lg">Recent Journals</h2>
-          <Link 
+          <Link
             href="/dashboard/journals"
             className="category-label hover:text-[#111] transition-colors"
           >
